@@ -41,14 +41,16 @@ form {
     margin-top: 2rem;
 }
 
-form legend {
+form legend{
     font-family: var(--fuenteSecundaria);
     font-size: 2rem;
     text-align: center;
+    display: block;
 }
 
-lengend span {
+legend span {
     font-size: 1rem;
     margin-top: 1rem;
     clear: both;
+    display: block;
 }
