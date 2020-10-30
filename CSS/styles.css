@@ -1,7 +1,7 @@
 :root {
     --primario: #C2185B;
     --secundario: #FFC107;
-    --primarioOscuro:rgb(156,10,69);
+    --primarioOscuro: rgb(156, 10, 69);
     --fuentePrimaria: "Arial", Helvetica, sans-serif;
     --fuenteSecundaria: "Poppins", sans-serif;
 }
@@ -35,44 +35,100 @@ body {
     -moz-box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.71);
     box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.71);
 }
-h1, h2{
+
+h1,
+h2 {
     font-family: var(--fuenteSecundaria);
     text-align: center;
     margin: 0;
 }
-h1{
+
+h1 {
     padding: 20px;
     color: white;
 }
-.contenedor-barra{
-background-color: var(--primarioOscuro);
+
+.contenedor-barra {
+    background-color: var(--primarioOscuro);
 }
+
 /**FORMULARIO**/
 form {
     padding: 3rem;
     margin-top: 2rem;
 }
 
-form legend{
+form legend {
     font-family: var(--fuenteSecundaria);
     font-size: 2rem;
     text-align: center;
 }
-.cen{
+
+.cen {
     display: block;
 }
+
 legend span {
     font-size: 1rem;
     margin-top: 1rem;
+    margin-bottom: 2rem;
     clear: both;
     display: block;
 }
+
 @media (min-width: 768px) {
-    .campos{
+    .campos {
         display: flex;
         justify-content: space-between;
     }
-    .campo{
+
+    .campo {
         flex: 0 0 calc(33.3% - 1rem);
+    }
+}
+
+.campo {
+    padding: .5rem 0;
+}
+
+.campo label {
+    font-size: 1.2rem;
+}
+
+.campo input[type="text"],
+.campo input[type="tel"] {
+    width: 100%;
+    border: none;
+    padding: .5rem;
+    height: 3rem;
+    margin-top: .5rem;
+    font-size: 1.2rem;
+}
+
+.enviar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.campo input[type="submit"] {
+    background-color: var(--primario);
+    border: none;
+    color: white;
+    padding: 1rem 4rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    transition: background-color .5s ease-in-out;
+    flex: 1;
+}
+
+.campo input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: var(--primarioOscuro);
+
+}
+
+@media (min-width: 768px) {
+    .campo input[type="submit"] {
+        flex: 0 0 auto;
     }
 }
