@@ -41,8 +41,7 @@ body {
     border-radius: 10px;
 }
 
-h1,
-h2 {
+h1, h2 {
     font-family: var(--fuenteSecundaria);
     text-align: center;
     margin: 0;
@@ -154,7 +153,17 @@ legend span {
     max-width: 800px;
     margin: 4rem auto 0 auto;
 }
-
+.total-contactos{
+    font-family: var(--fuenteSecundaria);
+margin: 2rem 0;
+text-align: center;
+color: var(--primario);
+font-size: 2rem;
+}
+.total-contactos span{
+font-size: 3rem;
+font-weight: 900;
+}
 .buscador {
     width: 100%;
     height: 4rem;
@@ -162,7 +171,9 @@ legend span {
     border: 1px solid #e1e1e1;
     margin: 2rem 0;
 }
-
+.contenedor-tabla{
+    overflow: scroll;
+}
 .listado-contactos {
     width: 100%;
     margin-top: 1rem;
@@ -182,7 +193,9 @@ legend span {
 .listado-contactos tbody td {
     padding: .5rem;
 }
-
+.listado-contactos tbody td:nth-child(4){
+text-align: center;
+}
 .listado-contactos button {
     background-color: transparent !important;
     border: none;
