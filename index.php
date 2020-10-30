@@ -34,7 +34,7 @@
         <input type="text" id="buscar" class="buscador sombra" placeholder="Buscar contactos...">
         <p class="total-contactos"><span>2</span>Contactos</p>
         <div class="contenedor-tabla">
-            <table id="listado-contactos">
+            <table id="listado-contactos" class="listado-contactos">
                 <thead>
                     <tr>
                         <th>Nombre</th>
