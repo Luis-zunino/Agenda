@@ -57,12 +57,22 @@ form legend{
     font-family: var(--fuenteSecundaria);
     font-size: 2rem;
     text-align: center;
+}
+.cen{
     display: block;
 }
-
 legend span {
     font-size: 1rem;
     margin-top: 1rem;
     clear: both;
     display: block;
+}
+@media (min-width: 768px) {
+    .campos{
+        display: flex;
+        justify-content: space-between;
+    }
+    .campo{
+        flex: 0 0 calc(33.3% - 1rem);
+    }
 }
