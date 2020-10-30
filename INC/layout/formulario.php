@@ -8,8 +8,8 @@
         <input type="text" placeholder="Nombre Empresa" id="empresa">
     </div>
     <div class="campo">
-        <label for="nombre">Teléfono:</label>
-        <input type="tel" placeholder="Teléfono" id="nombre">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" placeholder="Teléfono de Contacto" id="telefono">
     </div>
 </div>
 <div class="campo enviar">

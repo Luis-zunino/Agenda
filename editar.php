@@ -8,7 +8,7 @@
 
 <div class="bg-amarillo contenedor sombra">
     <form action="#" id="contacto">
-        <legend  class="cen">Edite el Contacto <span></span></legend>
+        <legend  class="cen">Edite el Contacto</legend>
         <?php include "inc/layout/formulario.php"; ?>
 
     </form>
