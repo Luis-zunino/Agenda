@@ -1,75 +1,107 @@
-const formularioContactos = document.querySelector("#contacto");
-
-
+const formularioContactos = document.querySelector('#contacto'),
+      listadoContactos = document.querySelector('#listado-contactos tbody');
+ 
 eventListeners();
-
+ 
 function eventListeners() {
-    //cuando el formulario de crear o editar se ejecuta
-    formularioContactos.addEventListener("submit", leerFormulario);
+    formularioContactos.addEventListener('submit', leerFormulario);
 }
-
-function leerFormulario(e) {
-    e.preventDefault();
-    //leero los datos de los imputs
-    const nombre = document.querySelector("#nombre").value,
-        empresa = document.querySelector("#empresa").value,
-        telefono = document.querySelector("#telefono").value,
-        accion = document.querySelector("#accion").value;
-
-    if (nombre === "" || empresa === "" || telefono === "") {
-        //DOS PARAMETROS TEXTO Y CLASE
-        mostrarNotificacion("Todos los campos son obligatorios", "error");
+function leerFormulario(e) { //e es el evento
+    e.preventDefault(); //Evita cambiar la url con la accion, recomend for java/ajax
+    const nombre = document.querySelector('#nombre').value, //captura valor introducido en id
+        telefono = document.querySelector('#telefono').value,   // en los inputs
+        empresa = document.querySelector('#empresa').value,
+        accion = document.querySelector('#accion').value;
+    if(nombre === '' || empresa === '' || telefono ==='') {
+        //dos parametros
+        mostrarNotificacion('All fields must be field', 'error');
     } else {
-        //PASA LA VALIDACION, CREAR LLAMADO A AJAX
+ 
+        // Pasa la validacion, crear llamado a Ajax
         const infoContacto = new FormData();
-        infoContacto.append("nombre", nombre);
-        infoContacto.append("empresa", empresa);
-        infoContacto.append("telefono", telefono);
-        infoContacto.append("accion", accion);
-
-        //console.log(...infoContacto);
-        if (accion === "crear") {
-            //creamos un nuevo contacto
+        infoContacto.append('nombre', nombre);
+        infoContacto.append('empresa', empresa);
+        infoContacto.append('telefono', telefono);
+        infoContacto.append('accion', accion);
+ 
+        //console.log(...infoContacto); Permite leer los datos enviados
+        if(accion === 'crear'){
+            // crearemos un nuevo contacto
             insertarBD(infoContacto);
         } else {
-            //editar el contacto
+ 
         }
-
-    }
-    console.log(nombre);
-}
-/**INSERTA EN LA BASE DE DATOS VIA AJAX **/
-function insertarBD(datos){
-//llamado a ajax
-
-//crear el objeto
-const xhr = new XMLHttpRequest();
-//abrir conexion
-xhr.open("POST", "inc/modelos/modelo-contactos.php", true);
-//pasar los datos
-xhr.onload = function(){
-    if(this.status === 200){
-        console.log(JSON.parse(xhr.responseText));
     }
 }
-//enviar los datos
-xhr.send(datos)
+/* INSERTAR MEDIANTE AJAX */
+function insertarBD(datos) {
+    // llamado a ajax
+ 
+    // crear el objeto
+    const xhr = new XMLHttpRequest();
+ 
+    // abrir la conexion
+    xhr.open('POST', 'inc/modelos/modelo-contactos.php', true);
+ 
+    // pasar los datos
+    xhr.onload = function() {
+        if(this.status === 200) {
+            console.log(JSON.parse( xhr.responseText) );//JSON.parse permite acceder facil a sus datos
+            // leemos la respuesta de PHP
+            const respuesta = JSON.parse( xhr.responseText);
+            //Insertar nuevo elemento en tabla
+            const nuevoContacto = document.createElement('tr');
+            nuevoContacto.innerHTML = `
+                <td>${respuesta.datos.nombre}</td>
+                <td>${respuesta.datos.empresa}</td>
+                <td>${respuesta.datos.telefono}</td>
+            `;
+            //crear contenedores botones
+            const contenedorAcciones = document.createElement('td');
+            //Icono editar
+            const iconoEditar = document.createElement('i');
+            iconoEditar.classList.add('fas', 'fa-pen-square');
+            //crear el enlace para editar
+            const btnEditar = document.createElement('a');
+            btnEditar.appendChild(iconoEditar);
+            btnEditar.href = `editar.php?id=${respuesta.datos.id_insertado}`;
+            btnEditar.classList.add('btn', 'btn-editar');
+            //agregarlo al padre
+            contenedorAcciones.appendChild(btnEditar);
+            //icono eliminar
+            const iconoEliminar = document.createElement('i');
+            iconoEliminar.classList.add('fas', 'fa-trash-alt');
+            //btn eliminar
+            const btnEliminar = document.createElement("button");
+            btnEliminar.appendChild(iconoEliminar);
+            btnEliminar.setAttribute('data-id', respuesta.datos.id_insertado);
+            btnEliminar.classList.add('btn', 'btn-borrar');
+            ///agregarlo al daddy
+            contenedorAcciones.appendChild(btnEliminar);
+            //agregar al tr
+            nuevoContacto.appendChild(contenedorAcciones);
+            //agregarlo con los contacts
+            listadoContactos.appendChild(nuevoContacto);
+        }
+    };
+    //enviar datos
+    xhr.send(datos)
 }
-//NOTIFICACIONES EN PANTALLA
+ 
+//Notficacion de pantalla
 function mostrarNotificacion(mensaje, clase) {
-    const notificacion = document.createElement("div");
-    notificacion.classList.add(clase, "notificacion", "sombra");
-    notificacion.textContent = mensaje;
-
-    //formulario
-    formularioContactos.insertBefore(notificacion, document.querySelector("form legend"));
-    //ocultar y mostrar la notificacion
-    setTimeout(() => {
-        notificacion.classList.add("visible");
-        setTimeout(() => {
-            notificacion.classList.remove("visible");
+    const notification = document.createElement('div'); //Crea un div donde se introduce el elemento
+    notification.classList.add(clase, 'notificacion', 'sombra'); //anade clases sobre notificacion
+    notification.textContent = mensaje; //texto del mensaje
+    //Inserta el mensaje antes del form.
+    formularioContactos.insertBefore(notification, document.querySelector('form legend'));
+    // Ocultar y Mostrar notificacion
+    setTimeout(() => {  //Actua al cabo de 0.1s
+        notification.classList.add('visible'); //Anade clase sobre notificacion
+        setTimeout(() => {  //quita la clase al cabo de 3s
+            notification.classList.remove('visible');
             setTimeout(() => {
-                notificacion.remove();
+                notification.remove(); //espera medio segundo para que se vea la animacion
             }, 500)
         }, 3000)
     }, 100)
