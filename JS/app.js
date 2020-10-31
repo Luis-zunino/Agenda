@@ -47,9 +47,9 @@ const xhr = new XMLHttpRequest();
 //abrir conexion
 xhr.open("POST", "inc/modelos/modelo-contactos.php", true);
 //pasar los datos
-xhr.onload=function(){
-    if(this.status===200){
-        console.log(JSON.parse(xhr.responseText) );
+xhr.onload = function(){
+    if(this.status === 200){
+        console.log(JSON.parse(xhr.responseText));
     }
 }
 //enviar los datos
