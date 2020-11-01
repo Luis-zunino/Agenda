@@ -59,20 +59,20 @@ function insertarBD(datos) {
             //crear contenedores botones
             const contenedorAcciones = document.createElement('td');
             //Icono editar
-            const iconoEditar = document.createElement('i');
-            iconoEditar.classList.add('fas', 'fa-pen-square');
+            const iconoEditar = document.createElement('i');//crea un elemento i
+            iconoEditar.classList.add('fas', 'fa-pen-square');//le agrega clases al icono creado
             //crear el enlace para editar
-            const btnEditar = document.createElement('a');
-            btnEditar.appendChild(iconoEditar);
-            btnEditar.href = `editar.php?id=${respuesta.datos.id_insertado}`;
-            btnEditar.classList.add('btn', 'btn-editar');
+            const btnEditar = document.createElement('a');//crea un lemento a
+            btnEditar.appendChild(iconoEditar);// le agrega como hijo al elemento i creado anteriormente (a padre / i hijo)
+            btnEditar.href = `editar.php?id=${respuesta.datos.id_insertado}`;//le agrega el id insertar_datos que se encuentra en editar.php( la respuesta biene de modelo-contactos.php)
+            btnEditar.classList.add('btn', 'btn-editar');//le agrega las clases
             //agregarlo al padre
-            contenedorAcciones.appendChild(btnEditar);
+            contenedorAcciones.appendChild(btnEditar);// le agrega como hijo el elemento a que a su vez tiene como hijo el elemento i.
             //icono eliminar
-            const iconoEliminar = document.createElement('i');
-            iconoEliminar.classList.add('fas', 'fa-trash-alt');
+            const iconoEliminar = document.createElement('i');//crea el icono no el boton de eliminar
+            iconoEliminar.classList.add('fas', 'fa-trash-alt');//le agrega las clases
             //btn eliminar
-            const btnEliminar = document.createElement("button");
+            const btnEliminar = document.createElement("button");//crea el boton de eliminar
             btnEliminar.appendChild(iconoEliminar);
             btnEliminar.setAttribute('data-id', respuesta.datos.id_insertado);
             btnEliminar.classList.add('btn', 'btn-borrar');
