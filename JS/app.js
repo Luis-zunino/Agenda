@@ -4,7 +4,10 @@ const formularioContactos = document.querySelector('#contacto'),
 eventListeners();
 
 function eventListeners() {
+    //cuando el formulario de crear o editar se ejecuta
     formularioContactos.addEventListener('submit', leerFormulario);
+    // listener para eliminar el boton
+    listadoContactos.addEventListener("click", eliminarContacto);
 }
 
 function leerFormulario(e) { //e es el evento
@@ -92,7 +95,22 @@ function insertarBD(datos) {
     //enviar datos
     xhr.send(datos)
 }
+//eliminar el contacto
+function eliminarContacto(e) {
+    //console.log("has hecho click"); nos avisa que hemos hecho click
+    //console.log(e.target);dice que tipo de elemento discte click
+    if (e.target.parentElement.classList.contains("btn-borrar")) {/*con parentElement nos da el padre del elemento,
+        en vez de seleccionarnos el i que es el hijo nos selecciona el boton completo y con classlist.contains buscamos elementos
+        la clase que le pusimos*/
 
+        //tomar el id del elemento clickeado
+        const id = e.target.parentElement.getAttribute("data-id");
+         console.log(id);
+    };
+
+    
+
+}
 //Notficacion de pantalla
 function mostrarNotificacion(mensaje, clase) {
     const notification = document.createElement('div'); //Crea un div donde se introduce el elemento
