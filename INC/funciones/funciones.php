@@ -5,7 +5,7 @@ function obtenerContactos(){
     include "bd.php";
     try {
         //va a realizar una consula a un query a lo que viene siendo la base de datos( con el mismo nombre que se creo la conexion en este caso conn)
-    return $conn->query(" SELECT id, nombre, telefono FROM contactos" /*se coloca la instruccion a SQL*/);
+    return $conn->query(" SELECT id, nombre,empresa, telefono FROM contactos" /*se coloca la instruccion a SQL*/);
     } catch (Exception $e) {
         //para que retorne un mensaje de error
         echo "Error!" . $e->getMessage() . "<br>";
