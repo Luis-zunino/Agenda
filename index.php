@@ -36,22 +36,25 @@ include "inc/funciones/funciones.php";
                 </thead>
                 <tbody>
                     <?php $contactos = obtenerContactos()/*cuando se mande llamar esta funcion, va a ir a funciones.php y solicitar datos*/;
-                    if($contactos->num_rows){ /*una forma de revisar si hay registros*/?>
+                    if ($contactos->num_rows) { /*una forma de revisar si hay registros*/
+                        foreach ($contactos as $contacto) {  ?>
 
-                    <tr>
-                        <td>Luis</td>
-                        <td>Udemy</td>
-                        <td>097478974</td>
-                        <td>
-                            <a class="btn-editar btn" href="editar.php?id=1">
-                                <i class="fas fa-pen-square"></i>
-                            </a>
-                            <button data-id="1" type="button" class="btn-borrar btn">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <?php } ?>
+                            <tr>
+                            <pre> <?php var_dump($contacto); ?> </pre>
+                                <td><?php echo $contacto["nombre"]; ?></td>
+                                <td><?php echo $contacto["empresa"]; ?></td>
+                                <td><?php echo $contacto["telefono"]; ?></td>
+                                <td>
+                                    <a class="btn-editar btn" href="editar.php?id=<?php echo $contacto["id"]; ?>">
+                                        <i class="fas fa-pen-square"></i>
+                                    </a>
+                                    <button data-id="<?php echo $contacto["id"]; ?>" type="button" class="btn-borrar btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    <?php }
+                    } ?>
                 </tbody>
             </table>
         </div>
