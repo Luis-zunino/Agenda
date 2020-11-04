@@ -40,7 +40,7 @@ if ($_GET["accion"] == "borrar") {
     //validamos el id
     $id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
     try {
-        $stmt = $conn->prepare(" DELETE FROM contactos WHERE id = ? ");
+        $stmt = $conn->prepare(" DELETE FROM contactos WHERE id=? ");
         $stmt->bind_param("i", $id);
         //ejecuta la consulta a la base de datos
         $stmt->execute();
@@ -58,5 +58,5 @@ if ($_GET["accion"] == "borrar") {
         );
     }
     echo json_encode($respuesta);
-    echo json_encode($_GET);
+    //echo json_encode($_GET); si estan los dos da error
 }
