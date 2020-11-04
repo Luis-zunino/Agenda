@@ -99,17 +99,47 @@ function insertarBD(datos) {
 function eliminarContacto(e) {
     //console.log("has hecho click"); nos avisa que hemos hecho click
     //console.log(e.target);dice que tipo de elemento discte click
-    if (e.target.parentElement.classList.contains("btn-borrar")) {/*con parentElement nos da el padre del elemento,
-        en vez de seleccionarnos el i que es el hijo nos selecciona el boton completo y con classlist.contains buscamos elementos
-        la clase que le pusimos*/
+    if (e.target.parentElement.classList.contains("btn-borrar")) {
+        /*con parentElement nos da el padre del elemento,
+        en vez de seleccionarnos el i que es el hijo nos selecciona el boton completo 
+        y con classlist.contains buscamos elementos con la clase que le pusimos*/
 
         //tomar el id del elemento clickeado
         const id = e.target.parentElement.getAttribute("data-id");
-         console.log(id);
-    };
+        //console.log(id);
+        // preguntar al usuario si esta seguro
+        const respuesta = confirm("¿Estás seguro(a)?");
+        if (respuesta) {
+            //llamado a ajax
+            //crear el objeto
+            const xhr = new XMLHttpRequest();
+            //abrir la conexion, con get extrae un dato ya existente de la base de datos
+            xhr.open("GET", `inc/modelos/modelo-contactos.php?id=${id}&accion=borrar`, true)
+            //leer la repsuesta
 
-    
 
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const resultado = JSON.parse(xhr.responseText);
+                    console.log(resultado);
+
+                    if (resultado.resultado === "correcto") {
+                        //eliminar el registro del dom
+                        console.log(e.target.parentElement.parentElement.parentElement); //me indica que elemento estoy seleccionando,escribo mas de una vez parentElement segun sea necesario ir al padre del padre
+                        e.target.parentElement.parentElement.parentElement.remove();
+                        //mostrar notificacion
+                        mostrarNotificacion("Contacto Eliminado", "correcto");
+
+                    } else {
+                        //mostramos una notificacion
+                        mostrarNotificacion("Hubo un error...", "error");
+                    }
+                }
+            }
+            //enviar la peticion
+            xhr.send();
+        }
+    }
 }
 //Notficacion de pantalla
 function mostrarNotificacion(mensaje, clase) {
