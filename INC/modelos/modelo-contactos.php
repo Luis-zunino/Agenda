@@ -58,5 +58,5 @@ if ($_GET["accion"] == "borrar") {
         );
     }
     echo json_encode($respuesta);
-    //echo json_encode($_GET); si estan los dos da error
+    json_encode($_GET); //si estan los dos da error
 }
