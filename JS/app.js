@@ -7,8 +7,11 @@ function eventListeners() {
     //cuando el formulario de crear o editar se ejecuta
     formularioContactos.addEventListener('submit', leerFormulario);
     // listener para eliminar el boton
-    listadoContactos.addEventListener("click", eliminarContacto);
+    if (listadoContactos) {
+        listadoContactos.addEventListener("click", eliminarContacto);
+    }
 }
+
 
 function leerFormulario(e) { //e es el evento
     e.preventDefault(); //Evita cambiar la url con la accion, recomend for java/ajax
