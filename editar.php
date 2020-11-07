@@ -4,13 +4,13 @@ include "inc/layout/header.php";
 
 
 //editar registro
-$id = filter_var($_GET["id"], FILTER_VALIDATE_INT); //validar que es un id
+$id = filter_var($_GET["id"], FILTER_VALIDATE_INT); /*validar que es un id*/
 
-if (!$id) { // si no se pudo convertir el id si no se pudo encontrar id
+if (!$id) { /* si no se pudo convertir el id si no se pudo encontrar id*/
     die("No es válido");
 }
 $resultado = obtenerContacto($id);
-$contacto = $resultado->fetch_assoc(); //para que nos traiga los resultados y se almacenen en este contacto
+$contacto = $resultado->fetch_assoc(); /*para que nos traiga los resultados y se almacenen en este contacto*/
 ?>
 
 <pre>
